@@ -9,8 +9,8 @@ export APPID := 'io.github.cosmic_utils.weather-applet'
 cargo-target-dir := env('CARGO_TARGET_DIR', 'target')
 bin-src := cargo-target-dir / 'release' / NAME
 
-rootdir := ''
-prefix := '/usr'
+rootdir := env('DESTDIR', '')
+prefix := env('PREFIX', env('HOME') / '.local')
 
 base-dir := absolute_path(clean(rootdir / prefix))
 share-dst := base-dir / 'share'
@@ -34,3 +34,15 @@ uninstall:
 	rm {{ desktop-dst }}
 	rm {{ applet-sun-icon-dst }}
 	rm {{ applet-moon-icon-dst }}
+
+install-user:
+	just install
+
+uninstall-user:
+	just uninstall
+
+install-system:
+	just install PREFIX="/usr"
+
+uninstall-system:
+	just uninstall PREFIX="/usr"

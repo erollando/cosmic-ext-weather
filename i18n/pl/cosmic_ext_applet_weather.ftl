@@ -1,3 +1,9 @@
 latitude = Szerokość geograficzna
 longitude = Długość geograficzna
-fahrenheit-toggle = Przełączyć na Fahrenheita?
+refresh-interval-minutes = Interwał odświeżania (minuty)
+refresh-interval-minutes-placeholder = 10
+location = Lokalizacja
+location-placeholder = np. Helsinki
+search = Szukaj
+search-results = Wyniki
+location-search-error = Wyszukiwanie lokalizacji nie powiodło się

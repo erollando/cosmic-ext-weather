@@ -1,3 +1,9 @@
 latitude = Latitud
 longitude = Longitud
-fahrenheit-toggle = Ändra till Fahrenheit?
+refresh-interval-minutes = Uppdateringsintervall (minuter)
+refresh-interval-minutes-placeholder = 10
+location = Plats
+location-placeholder = t.ex. Helsinki
+search = Sök
+search-results = Resultat
+location-search-error = Platssökning misslyckades

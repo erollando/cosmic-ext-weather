@@ -1,3 +1,9 @@
 latitude = Географска ширина
 longitude = Географска дължина
-fahrenheit-toggle = Превключване към Фаренхайт?
+refresh-interval-minutes = Интервал на опресняване (минути)
+refresh-interval-minutes-placeholder = 10
+location = Местоположение
+location-placeholder = напр. Helsinki
+search = Търсене
+search-results = Резултати
+location-search-error = Търсенето на местоположение не бе успешно

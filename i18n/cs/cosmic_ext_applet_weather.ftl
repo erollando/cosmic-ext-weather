@@ -1,3 +1,9 @@
 latitude = Zeměpisná šířka
 longitude = Zeměpisná délka
-fahrenheit-toggle = Přepnout na Fahrenheit?
+refresh-interval-minutes = Interval aktualizace (minuty)
+refresh-interval-minutes-placeholder = 10
+location = Poloha
+location-placeholder = např. Helsinki
+search = Hledat
+search-results = Výsledky
+location-search-error = Vyhledávání polohy selhalo

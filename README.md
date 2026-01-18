@@ -1,5 +1,7 @@
 # Simple weather info applet for cosmic
 
+This repository is a fork of `cosmic-utils/cosmic-ext-applet-weather` (original author: rwxroot). Maintained here by `e.rollando@duck.com`.
+
 <p align="center">
     <img alt="Applet Screenshot" src="https://github.com/cosmic-utils/cosmic-ext-applet-weather/blob/main/data/applet_screenshot_1.png">
 </p>
@@ -39,19 +41,31 @@ sudo apt install libxkbcommon-dev just
 git clone https://github.com/cosmic-utils/cosmic-ext-applet-weather.git
 cd cosmic-ext-applet-weather
 just build
-sudo just install
+just install
 ```
 
 `libxkbcommon-dev` is required by `smithay-client-toolkit`
 
-## Configuration
+This installs into `~/.local` (`~/.local/bin` and `~/.local/share/...`). Ensure `~/.local/bin` is on your `PATH`.
 
-The applet provides a graphical interface for entering coordinates and toggling the Fahrenheit scale. For manual configuration, follow the steps below.
-
-_Use the IP-API web service (https://ip-api.com/docs/api:json) to retrieve approximate coordinates, or alternatively, use mapping platforms like Google Maps to obtain accurate latitude and longitude._
+#### Manual (system install)
 
 ```sh
-cd ~/.config/cosmic/io.github.cosmic_utils.weather-applet/v1/
+sudo apt install libxkbcommon-dev just
+git clone https://github.com/cosmic-utils/cosmic-ext-applet-weather.git
+cd cosmic-ext-applet-weather
+just build
+sudo just install-system
+```
+
+## Configuration
+
+The applet provides a graphical interface for searching a location name (which fills in coordinates) and setting the refresh interval. For manual configuration, follow the steps below.
+
+Note: weather is fetched using `latitude`/`longitude`. `location_name` is optional and only affects the UI field.
+
+```sh
+cd ~/.config/cosmic/io.github.cosmic_utils.weather-applet/v3/
 ```
 
 Add latitude:
@@ -68,19 +82,32 @@ touch longitude
 echo "23.811234" > longitude
 ```
 
-Toggle Fahrenheit:
+Set refresh interval (minutes):
 
 ```
-touch use_fahrenheit
-echo "true" > use_fahrenheit
+touch refresh_interval_minutes
+echo "10" > refresh_interval_minutes
+```
+
+Set location name (optional; used for the UI field):
+
+```
+touch location_name
+echo "Helsinki" > location_name
 ```
 
 To refresh the applet simply run `pkill cosmic-panel`
 
 ## Uninstall
 
-To uninstall files installed by `just install`, run:
+To uninstall a user install (`~/.local`), run:
 
 ```sh
-sudo just uninstall
+just uninstall
+```
+
+To uninstall a system install (`/usr`), run:
+
+```sh
+sudo just uninstall-system
 ```

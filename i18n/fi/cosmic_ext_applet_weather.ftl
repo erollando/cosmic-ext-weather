@@ -1,3 +1,9 @@
 latitude = Leveysaste
 longitude = Pituusaste
-fahrenheit-toggle = Vaihtaa Fahrenheit-asteikolle?
+refresh-interval-minutes = Päivitysväli (minuuttia)
+refresh-interval-minutes-placeholder = 10
+location = Sijainti
+location-placeholder = esim. Helsinki
+search = Hae
+search-results = Tulokset
+location-search-error = Sijainnin haku epäonnistui

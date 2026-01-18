@@ -3,6 +3,51 @@ use serde::Deserialize;
 
 use crate::config::APP_ID;
 
+#[derive(Clone, Debug)]
+pub struct GeocodedPlace {
+    pub name: String,
+    pub latitude: f64,
+    pub longitude: f64,
+    pub admin1: Option<String>,
+    pub country: Option<String>,
+}
+
+impl GeocodedPlace {
+    pub fn label(&self) -> String {
+        let mut parts = vec![self.name.as_str()];
+
+        if let Some(admin1) = self.admin1.as_deref()
+            && !admin1.is_empty()
+        {
+            parts.push(admin1);
+        }
+
+        if let Some(country) = self.country.as_deref()
+            && !country.is_empty()
+        {
+            parts.push(country);
+        }
+
+        parts.join(", ")
+    }
+}
+
+#[derive(Default, Deserialize)]
+#[serde(default)]
+struct GeocodingResponse {
+    results: Option<Vec<GeocodingResult>>,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(default)]
+struct GeocodingResult {
+    name: String,
+    latitude: f64,
+    longitude: f64,
+    admin1: Option<String>,
+    country: Option<String>,
+}
+
 #[derive(Deserialize)]
 pub struct WeatherApiResponse {
     properties: Properties,
@@ -112,4 +157,39 @@ pub async fn get_location_forecast(
         .unwrap_or(0);
 
     Ok(current_temperature)
+}
+
+pub async fn geocode_place(query: String) -> Result<Vec<GeocodedPlace>, reqwest::Error> {
+    let query = query.trim().to_string();
+    if query.is_empty() {
+        return Ok(vec![]);
+    }
+
+    let response = reqwest::Client::new()
+        .get("https://geocoding-api.open-meteo.com/v1/search")
+        .query(&[
+            ("name", query.as_str()),
+            ("count", "5"),
+            ("language", "en"),
+            ("format", "json"),
+        ])
+        .header(header::USER_AGENT, APP_ID)
+        .send()
+        .await?;
+
+    let data = response.json::<GeocodingResponse>().await?;
+    let results = data
+        .results
+        .unwrap_or_default()
+        .into_iter()
+        .map(|result| GeocodedPlace {
+            name: result.name,
+            latitude: result.latitude,
+            longitude: result.longitude,
+            admin1: result.admin1,
+            country: result.country,
+        })
+        .collect();
+
+    Ok(results)
 }

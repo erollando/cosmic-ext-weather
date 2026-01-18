@@ -1,3 +1,9 @@
 latitude = широта
 longitude = долгота
-fahrenheit-toggle = Переключить на Фаренгейт?
+refresh-interval-minutes = Интервал обновления (минуты)
+refresh-interval-minutes-placeholder = 10
+location = Местоположение
+location-placeholder = напр. Helsinki
+search = Поиск
+search-results = Результаты
+location-search-error = Не удалось найти местоположение

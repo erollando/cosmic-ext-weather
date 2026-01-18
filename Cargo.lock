@@ -1007,7 +1007,7 @@ dependencies = [
 
 [[package]]
 name = "cosmic-ext-applet-weather"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "chrono",
  "i18n-embed",

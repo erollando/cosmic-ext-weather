@@ -5,3 +5,6 @@
 cargo-sources.json
 .flatpak-builder
 /repo/
+
+# Local metadata (do not commit)
+cargo-metadata.json

@@ -1,3 +1,9 @@
 latitude = Latitude
 longitude = Longitude
-fahrenheit-toggle = Switch to Fahrenheit?
+refresh-interval-minutes = Refresh interval (minutes)
+refresh-interval-minutes-placeholder = 10
+location = Location
+location-placeholder = e.g. Helsinki
+search = Search
+search-results = Results
+location-search-error = Location search failed
