@@ -1,36 +1,14 @@
 # Simple weather info applet for cosmic
 
-This repository is a fork of `cosmic-utils/cosmic-ext-applet-weather` (original author: rwxroot). Maintained here by `e.rollando@duck.com`.
+This repository is a fork of `cosmic-utils/cosmic-ext-applet-weather` (original author: rwxroot). 
 
-<p align="center">
-    <img alt="Applet Screenshot" src="https://github.com/cosmic-utils/cosmic-ext-applet-weather/blob/main/data/applet_screenshot_1.png">
-</p>
-
-<p align="center">
-    <img alt="Applet Screenshot" src="https://github.com/cosmic-utils/cosmic-ext-applet-weather/blob/main/data/applet_screenshot_2.png">
-</p>
-
-<p align="center">
-    <img alt="Applet Screenshot" src="https://github.com/cosmic-utils/cosmic-ext-applet-weather/blob/main/data/applet_screenshot_3.png">
-</p>
-
-<p align="center">
-    <img alt="Applet Screenshot" src="https://github.com/cosmic-utils/cosmic-ext-applet-weather/blob/main/data/applet_screenshot_4.png">
-</p>
+This fork contains downstream changes (code removals/additions and dependency updates) to fit my setup/workflow.
 
 ## Installation
 
-### Flatpak
+### COSMIC Store
 
 Depending on how you've installed COSMIC Desktop, the Weather applet may show up in your app store by default. In COSMIC Store it should be under the "COSMIC Applets" category.
-
-If the applet does not show up in your app store, you'll need to add `cosmic-flatpak` as a source:
-
-```sh
-flatpak remote-add --if-not-exists --user cosmic https://apt.pop-os.org/cosmic/cosmic.flatpakrepo
-```
-
-Then, proceed to your preferred app store and search for Weather applet.
 
 ### Manual
 
