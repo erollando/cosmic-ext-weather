@@ -16,25 +16,19 @@ The applet can be installed using the following steps:
 
 ```sh
 sudo apt install libxkbcommon-dev just
-git clone https://github.com/cosmic-utils/cosmic-ext-applet-weather.git
+git clone git clone https://github.com/erollando/cosmic-ext-weather.git
 cd cosmic-ext-applet-weather
 just build
+# user-install
 just install
+# system-install
+# sudo just install-system
 ```
 
 `libxkbcommon-dev` is required by `smithay-client-toolkit`
 
-This installs into `~/.local` (`~/.local/bin` and `~/.local/share/...`). Ensure `~/.local/bin` is on your `PATH`.
-
-#### Manual (system install)
-
-```sh
-sudo apt install libxkbcommon-dev just
-git clone https://github.com/cosmic-utils/cosmic-ext-applet-weather.git
-cd cosmic-ext-applet-weather
-just build
-sudo just install-system
-```
+"User-install" installs into `~/.local` (`~/.local/bin` and `~/.local/share/...`). Ensure `~/.local/bin` is on your `PATH`.
+"System install" installs into `/usr/bin` and `/usr/share`.
 
 ## Configuration
 
@@ -50,14 +44,14 @@ Add latitude:
 
 ```
 touch latitude
-echo "12.123163" > latitude
+echo "41.902782" > latitude
 ```
 
 Add longitude:
 
 ```
 touch longitude
-echo "23.811234" > longitude
+echo "12.496366" > longitude
 ```
 
 Set refresh interval (minutes):
