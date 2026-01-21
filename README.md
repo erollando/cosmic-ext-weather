@@ -1,4 +1,4 @@
-# Simple weather info applet for cosmic
+# Cosmic basic weather info applet
 
 This repository is a fork of `cosmic-utils/cosmic-ext-applet-weather` (original author: rwxroot). 
 
@@ -6,22 +6,21 @@ This fork contains downstream changes (code removals/additions and dependency up
 
 ## Installation
 
-### COSMIC Store
-
-Depending on how you've installed COSMIC Desktop, the Weather applet may show up in your app store by default. In COSMIC Store it should be under the "COSMIC Applets" category.
-
 ### Manual
 
 The applet can be installed using the following steps:
 
 ```sh
-sudo apt install libxkbcommon-dev just
-git clone git clone https://github.com/erollando/cosmic-ext-weather.git
+# build rust
+sudo apt install cargo just
+# needed dependency
+sudo apt install libxkbcommon-dev
+git clone https://github.com/erollando/cosmic-ext-weather.git
 cd cosmic-ext-applet-weather
 just build
 # user-install
 just install
-# system-install
+# alternatively, system-install
 # sudo just install-system
 ```
 
