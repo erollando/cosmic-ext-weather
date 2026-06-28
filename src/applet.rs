@@ -117,7 +117,7 @@ impl cosmic::Application for Weather {
         cosmic::iced::time::every(self.refresh_interval_duration()).map(|_| Message::Tick)
     }
 
-    fn style(&self) -> Option<cosmic::iced_runtime::Appearance> {
+    fn style(&self) -> Option<cosmic::iced::theme::Style> {
         Some(cosmic::applet::style())
     }
 
@@ -170,7 +170,9 @@ impl cosmic::Application for Weather {
                     if let Err(error) = self.config.set_longitude(handler, longitude) {
                         tracing::error!("{error}");
                     }
-                    if let Err(error) = self.config.set_location_name(handler, self.location_query.clone())
+                    if let Err(error) = self
+                        .config
+                        .set_location_name(handler, self.location_query.clone())
                     {
                         tracing::error!("{error}");
                     }
@@ -279,20 +281,21 @@ impl cosmic::Application for Weather {
         .size(self.core.applet.suggested_size(true).0)
         .symbolic(true);
         let temperature = self.core.applet.text(self.format_temperature());
+        let (major_padding, minor_padding) = self.core.applet.suggested_padding(true);
 
         let data = if self.core.applet.is_horizontal() {
             cosmic::Element::from(
-                cosmic::iced_widget::row![icon, temperature]
+                cosmic::iced::widget::row![icon, temperature]
                     .align_y(cosmic::iced::alignment::Vertical::Center)
                     .spacing(4)
-                    .padding([0, self.core.applet.suggested_padding(true)]),
+                    .padding([0, major_padding]),
             )
         } else {
             cosmic::Element::from(
-                cosmic::iced_widget::column![icon, temperature]
+                cosmic::iced::widget::column![icon, temperature]
                     .align_x(cosmic::iced::alignment::Horizontal::Center)
                     .spacing(4)
-                    .padding([self.core.applet.suggested_padding(true), 0]),
+                    .padding([minor_padding, 0]),
             )
         };
 
@@ -304,17 +307,13 @@ impl cosmic::Application for Weather {
     }
 
     fn view_window(&self, _id: cosmic::iced::window::Id) -> cosmic::Element<'_, Message> {
-        let location_search_row = cosmic::iced_widget::column![
+        let location_search_row = cosmic::iced::widget::column![
             cosmic::widget::text(fl!("location")),
-            cosmic::iced_widget::row![
-                cosmic::widget::text_input(
-                    fl!("location-placeholder"),
-                    &self.location_query
-                )
-                .on_input(Message::UpdateLocationQuery)
-                .width(cosmic::iced::Length::Fill),
-                cosmic::widget::button::standard(fl!("search"))
-                    .on_press(Message::SearchLocation),
+            cosmic::iced::widget::row![
+                cosmic::widget::text_input(fl!("location-placeholder"), &self.location_query)
+                    .on_input(Message::UpdateLocationQuery)
+                    .width(cosmic::iced::Length::Fill),
+                cosmic::widget::button::standard(fl!("search")).on_press(Message::SearchLocation),
             ]
             .spacing(8)
         ]
@@ -324,13 +323,14 @@ impl cosmic::Application for Weather {
             .geocode_error
             .as_ref()
             .map(|msg| cosmic::Element::from(cosmic::widget::text(msg)))
-            .unwrap_or_else(|| cosmic::Element::from(cosmic::widget::Space::with_height(0)));
+            .unwrap_or_else(|| cosmic::Element::from(cosmic::widget::Space::new().height(0)));
 
         let geocode_results = if self.geocoded_places.is_empty() {
-            cosmic::Element::from(cosmic::widget::Space::with_height(0))
+            cosmic::Element::from(cosmic::widget::Space::new().height(0))
         } else {
             let items = self.geocoded_places.iter().cloned().fold(
-                cosmic::iced_widget::column![cosmic::widget::text(fl!("search-results"))].spacing(4),
+                cosmic::iced::widget::column![cosmic::widget::text(fl!("search-results"))]
+                    .spacing(4),
                 |column, place| {
                     column.push(
                         cosmic::widget::button::standard(place.label())
@@ -341,21 +341,21 @@ impl cosmic::Application for Weather {
             cosmic::Element::from(items.spacing(4))
         };
 
-        let latitude_row = cosmic::iced_widget::column![
+        let latitude_row = cosmic::iced::widget::column![
             cosmic::widget::text(fl!("latitude")),
             cosmic::widget::text_input(fl!("latitude"), &self.latitude)
                 .on_input(Message::UpdateLatitude)
                 .width(cosmic::iced::Length::Fill)
         ]
         .spacing(4);
-        let longitude_row = cosmic::iced_widget::column![
+        let longitude_row = cosmic::iced::widget::column![
             cosmic::widget::text(fl!("longitude")),
             cosmic::widget::text_input(fl!("longitude"), &self.longitude)
                 .on_input(Message::UpdateLongitude)
                 .width(cosmic::iced::Length::Fill)
         ]
         .spacing(4);
-        let refresh_interval_row = cosmic::iced_widget::column![
+        let refresh_interval_row = cosmic::iced::widget::column![
             cosmic::widget::text(fl!("refresh-interval-minutes")),
             cosmic::widget::text_input(
                 fl!("refresh-interval-minutes-placeholder"),
@@ -366,7 +366,7 @@ impl cosmic::Application for Weather {
         ]
         .spacing(4);
 
-        let data = cosmic::iced_widget::column![
+        let data = cosmic::iced::widget::column![
             cosmic::applet::padded_control(location_search_row),
             cosmic::applet::padded_control(geocode_error),
             cosmic::applet::padded_control(geocode_results),

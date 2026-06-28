@@ -68,11 +68,13 @@ impl WeatherConfig {
         if let Err(error) = migrated.set_longitude(config_handler, migrated.longitude) {
             tracing::error!("Error whilst migrating config longitude: {:#?}", error);
         }
-        if let Err(error) = migrated.set_refresh_interval_minutes(
-            config_handler,
-            migrated.refresh_interval_minutes,
-        ) {
-            tracing::error!("Error whilst migrating config refresh interval: {:#?}", error);
+        if let Err(error) =
+            migrated.set_refresh_interval_minutes(config_handler, migrated.refresh_interval_minutes)
+        {
+            tracing::error!(
+                "Error whilst migrating config refresh interval: {:#?}",
+                error
+            );
         }
         if let Err(error) =
             migrated.set_location_name(config_handler, migrated.location_name.clone())
@@ -117,11 +119,13 @@ impl WeatherConfig {
         if let Err(error) = migrated.set_longitude(config_handler, migrated.longitude) {
             tracing::error!("Error whilst migrating config longitude: {:#?}", error);
         }
-        if let Err(error) = migrated.set_refresh_interval_minutes(
-            config_handler,
-            migrated.refresh_interval_minutes,
-        ) {
-            tracing::error!("Error whilst migrating config refresh interval: {:#?}", error);
+        if let Err(error) =
+            migrated.set_refresh_interval_minutes(config_handler, migrated.refresh_interval_minutes)
+        {
+            tracing::error!(
+                "Error whilst migrating config refresh interval: {:#?}",
+                error
+            );
         }
         if let Err(error) =
             migrated.set_location_name(config_handler, migrated.location_name.clone())
